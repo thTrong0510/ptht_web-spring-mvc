@@ -1,0 +1,36 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Quan Tri San Pham</title>
+    <th:block th:replace="base :: resources"></th:block>
+</head>
+<body>
+    <div th:replace="base :: header"></div>
+
+    <section class="container">
+        <form method="post" th:object="${product}" enctype="multipart/form-data" th:action="@{/admin/products}">
+            <div class="mb-3 mt-3">
+                <input type="text" class="form-control" placeholder="Enter name" required="true" th:field="*{name}">
+            </div>
+            <div class="mb-3 mt-3">
+                <input type="number" class="form-control" placeholder="Enter price"  th:field="*{price}">
+            </div>
+
+            <div class="mb-3 mt-3">
+                <select class="form-select"  th:field="*{categoryId}">
+                    <option th:each="c:${categories}" th:value="c.id" th:text="c.name"></option>
+                </select>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <input type="file" th:field="*{file}" class="form-control" placeholder="Image">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
+
+    <div th:replace="base :: footer"></div>
+</body>
+</html>
+
