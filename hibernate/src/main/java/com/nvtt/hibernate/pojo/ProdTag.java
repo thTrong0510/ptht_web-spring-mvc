@@ -40,6 +40,9 @@ public class ProdTag implements Serializable {
     @JoinColumn(name = "tag_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Tag tagId;
+    
+    // nếu prodTag có tổ hợp 2 khóa ngoại liên kết là unique thì -> đây chỉ là bảng trung gian ko cần tạo class
+    // nhưng nếu nó ko unique thì cần tạo bảng/class mới 
 
     public ProdTag() {
     }

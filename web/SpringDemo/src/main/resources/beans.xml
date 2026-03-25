@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-6.2.xsd
+    ">
+    <!--khi khai báo như thế này nó sẽ dùng constructor ko tham số để tạo Khoa-->
+    <bean name="khoa" class="com.nvtt.springdemo.Khoa">
+        <!--setter inject vào--> 
+        <property name="ten" value="CNTT" /> 
+    </bean>
+    <!--lúc này nó đã tạo được hạt đậu tên khoa trên rổ đậu--> 
+    
+    <!--mặc định scope="singleton" nếu chỉnh nó thành prototype -> mỗi lần DI về sẽ ss tạo đối tượng mới--> 
+    <bean name="sva" class="com.nvtt.springdemo.SinhVien" scope="prototype">
+        <property name="id" value="1" />
+        <property name="ten" value="Nguyen Van A" />
+        <property name="khoa" ref="khoa" />
+    </bean>
+    <!--còn 1 kiểu nữa là session tức là trong 1 phiên làm việc nó sẽ là singleton, nhưng kết thúc phiên gọi lại nó sẽ tạo cái khác--> 
+    <!--tương tự với request khi 1 yêu cầu gửi từ client lên server -> gọi DI sẽ chỉ lấy 1, nhưng khi kết thúc request đến request sẽ tạo hạt khác-->
+    <!--application mọi nơi mọi request ... luôn là singleton khi bắt đầu hê thống đến close -> khi nào tắt mở lại hệ thống nó mới ra cái mới-->
+    
+    <!--=> quy định thời gian sống của Bean đa số dùng singleton--> 
+    
+    <!--lúc này khi build thì file này sẽ được chuyển qua classpath tức là nó sẽ nằm trong thư mục target/classes-->
+    
+    <!--tất cả bên trên là dùng setter injection => bây giờ dùng constructor injection  -->
+    <bean name="svb" class="com.nvtt.springdemo.SinhVien" scope="singleton">
+        <constructor-arg value="88"/>
+        <constructor-arg value="Trong"/>
+        <constructor-arg ref="khoa"/>
+
+        <!--một số trường như index và name (không thay đổi thì nó sẽ theo đúng trật tự trong constructor)-->
+        <!--nếu không muốn thì cứ set từng trường vd name="" value=""-->
+    </bean>
+    
+    <!--đối với dạng collection--> 
+    <bean name="svc" class="com.nvtt.springdemo.SinhVien" scope="prototype">
+        <property name="id" value="1" />
+        <property name="ten" value="Nguyen Van A" />
+        <property name="khoa" ref="khoa" />
+        <property name="diem">
+            <!--tương ứng cũng có map, set ...-->
+            <list>
+                <value>9.5</value>
+                <value>10</value>
+                <value>10</value>
+            </list>
+        </property>
+    </bean>
+</beans>

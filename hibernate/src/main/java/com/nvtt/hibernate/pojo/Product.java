@@ -28,8 +28,8 @@ import java.util.Set;
  * @author vthan
  */
 @Entity
-@Table(name = "product")
-@NamedQueries({
+@Table(name = "product") // vì là db first nên cần chỉ định đúng tên bảng cần ánh xa 
+@NamedQueries({ // những câu query được viết sẵn có thể lấy sử dụng 
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
     @NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.id = :id"),
     @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
@@ -40,6 +40,8 @@ import java.util.Set;
     @NamedQuery(name = "Product.findByCreatedDate", query = "SELECT p FROM Product p WHERE p.createdDate = :createdDate"),
     @NamedQuery(name = "Product.findByActive", query = "SELECT p FROM Product p WHERE p.active = :active")})
 public class Product implements Serializable {
+    
+    // Serializable này giúp hỗ trợ serializer (đưa ra web) - deserializer nhận từ web
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -65,9 +67,24 @@ public class Product implements Serializable {
     private Boolean active;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Set<ProdTag> prodTagSet;
+    
+    // trường hợp nếu ProdTag chỉ là bảng trung gian: tức là trong prodTag chứ 2 key của Prod và Tag là cặp key unique
+    // có thể cấu hình bên Tag 
+//    @ManyToMany
+//    @JoinTable(
+//            name = "prod_tag",
+//            joinColumns = @JoinColumn(name = "product_id"),
+//            inverseJoinColumns = @JoinColumn(name = "tag_id")
+//    )
+    private Set<Tag> tags;
+    
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Category categoryId;
+    
+    // One ở cuối thì mặc định java là eager -> và thực hiện truy vấn độc lập để trích xuất thông tin của Cate
+    // many ở cuối mặc định là lazy -> và dùng join để truy vấn
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Set<Comment> commentSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
