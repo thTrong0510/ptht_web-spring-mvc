@@ -22,7 +22,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
  * @author vthan
  */
 @Configuration
-@PropertySource("classpath:databases.properties")
+@PropertySource("classpath:databases.properties") // chỉ cần khai báo ở đây 1 lần -> nạp lên rồi thì có thể dùng ở file khác 
 public class HibernateConfigs {
 
     @Autowired

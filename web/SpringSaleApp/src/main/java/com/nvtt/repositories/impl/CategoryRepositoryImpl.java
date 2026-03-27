@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author vthan
  */
-@Repository
+@Repository // hạt đậu nằm trong tần truy vấn dữ liệu -> khi Autowired cha thì nó sẽ lấy con gán vào 
 @Transactional
 public class CategoryRepositoryImpl implements CategoryRepository {
 

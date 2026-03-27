@@ -4,8 +4,10 @@
  */
 package com.nvtt.configs;
 
+import com.nvtt.formatters.CategoryFormatter;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -32,4 +34,9 @@ public class WebAppContextConfigs implements WebMvcConfigurer {
         configurer.enable();
     }
 
+    // thêm formatter để nhận dữ liệu khóa ngoại từ view vào controller
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new CategoryFormatter());
+    }
 }

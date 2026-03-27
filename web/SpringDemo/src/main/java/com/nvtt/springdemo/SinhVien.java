@@ -5,6 +5,8 @@
 package com.nvtt.springdemo;
 
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  *
@@ -13,6 +15,9 @@ import java.util.List;
 public class SinhVien {
     private int id;
     private String ten;
+    
+    @Autowired // mặc định khi tạo biến SinhVien sẽ lên rổ đậu tìm Khoa để gán vào
+    @Qualifier("khoa1") // nếu có nhiều khoa thì dùng annotation này để chỉ định 
     private Khoa khoa;
     private List<Double> diem;
 

@@ -4,14 +4,19 @@
        xmlns:context="http://www.springframework.org/schema/context"
 
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-6.2.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
     ">
     <!--khi khai báo như thế này nó sẽ dùng constructor ko tham số để tạo Khoa-->
     <bean name="khoa" class="com.nvtt.springdemo.Khoa">
         <!--setter inject vào--> 
         <property name="ten" value="CNTT" /> 
     </bean>
-    <!--lúc này nó đã tạo được hạt đậu tên khoa trên rổ đậu--> 
+    <!--lúc này nó đã tạo được hạt đậu tên khoa trên rổ đậu-->
+    
+    <bean name="khoa1" class="com.nvtt.springdemo.Khoa">
+        <!--setter inject vào--> 
+        <property name="ten" value="CNSH" /> 
+    </bean> 
     
     <!--mặc định scope="singleton" nếu chỉnh nó thành prototype -> mỗi lần DI về sẽ ss tạo đối tượng mới--> 
     <bean name="sva" class="com.nvtt.springdemo.SinhVien" scope="prototype">
@@ -51,4 +56,12 @@
             </list>
         </property>
     </bean>
+    
+    <!--đối với hạt đậu này mình ko set khoa -> mình sẽ enable cho phép sử dụng annotation lên và dùng Autowired để nó tự vào đây lấy khoa ra gắn vào-->
+    <bean name="sv_no_khoa" class="com.nvtt.springdemo.SinhVien" scope="singleton">
+        <property name="id" value="1" />
+        <property name="ten" value="Nguyen Van A" />
+    </bean>
+    
+    <context:annotation-config />
 </beans>

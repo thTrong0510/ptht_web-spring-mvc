@@ -57,6 +57,8 @@ public class SpringDemo {
         
         // dùng dạng collection trong xml 
         
-        System.out.println("Hello World!");
+        // 
+        SinhVien svNoKhoa = (SinhVien) ctx.getBean("sv_no_khoa");
+        System.err.printf("%d - %s - %s", svNoKhoa.getId(), svNoKhoa.getTen(), svNoKhoa.getKhoa());
     }
 }

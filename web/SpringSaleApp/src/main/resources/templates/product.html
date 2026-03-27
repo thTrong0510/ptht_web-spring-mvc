@@ -16,8 +16,10 @@
                 <input type="number" class="form-control" placeholder="Enter price"  th:field="*{price}">
             </div>
 
+            <!--đối với trường khóa ngoại cũng dùng th:field ở đây để đóng gói nó thành 1 object chứ nếu gửi các thông tin lẻ như tên của cate -> spring sẽ chặn bắt lỗi bad request content-->
+            <!--và cần phải thêm 1 cái formatter ở đây mình sẽ tạo riêng 1 gói cấu hình cho nó--> 
             <div class="mb-3 mt-3">
-                <select class="form-select"  th:field="*{categoryId}">
+                <select class="form-select"  th:field="*{categoryId}"> 
                     <option th:each="c:${categories}" th:value="c.id" th:text="c.name"></option>
                 </select>
             </div>

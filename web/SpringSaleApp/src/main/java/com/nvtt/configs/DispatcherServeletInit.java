@@ -13,6 +13,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class DispatcherServeletInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
+    // những class chỉ là rỗ đậu tức là có @configuration nhưng không kế thừa bất kì class nào thì khai báo trong này
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[] {
@@ -21,6 +22,7 @@ public class DispatcherServeletInit extends AbstractAnnotationConfigDispatcherSe
         };
     }
 
+    // khai báo các config có kế thừa WebMvcConfigurer
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[] {
