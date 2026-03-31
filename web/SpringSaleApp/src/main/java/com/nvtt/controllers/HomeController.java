@@ -48,17 +48,17 @@ public class HomeController {
     }
     
     // request param
-        @RequestMapping("/")
-    public String HomePageRequestParam(Model model, 
-            @RequestParam(value = "firstName", required = false, defaultValue = "none") String fn,
-            @RequestParam(value = "lastName", required = false, defaultValue = "none") String ln) {
-        // do some things 
-        // mặc định RequestParam này sẽ là bắt buộc phải truyền nếu ko sẽ bị lỗi -> tránh thì có thể set required = false
-        // hoặc set default value 
-        // ưu nhanh vì ánh xạ đụng cái biến cần lấy - khuyết là dài dòng 
-        // => nếu định hình được là truyền lên cái gì và ít tham số thì nên dùng cái này 
-        return "index";
-    }
+//        @RequestMapping("/")
+//    public String HomePageRequestParam(Model model, 
+//            @RequestParam(value = "firstName", required = false, defaultValue = "none") String fn,
+//            @RequestParam(value = "lastName", required = false, defaultValue = "none") String ln) {
+//        // do some things 
+//        // mặc định RequestParam này sẽ là bắt buộc phải truyền nếu ko sẽ bị lỗi -> tránh thì có thể set required = false
+//        // hoặc set default value 
+//        // ưu nhanh vì ánh xạ đụng cái biến cần lấy - khuyết là dài dòng 
+//        // => nếu định hình được là truyền lên cái gì và ít tham số thì nên dùng cái này 
+//        return "index";
+//    }
     
     // 2 dạng trên thì url: ?key=value&key=value
     

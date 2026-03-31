@@ -88,21 +88,21 @@ public class ProductRepositoryImpl implements ProductRepository {
         return query.getResultList();
     }
 
-//    public Product getProductById(int id) {
-//        try (Session s = HibernateUtils.getFactory().openSession()) {
-//            return s.get(Product.class, id);
-//        }
-//    }
-//    
-//    public void addOrUpdateProduct(Product p) {
-//        try (Session s = HibernateUtils.getFactory().openSession()) {
-//            if (p.getId() == null) {
-//                s.persist(p);
-//            } else {
-//                s.merge(p);
-//            }
-//        }
-//    }
+    public Product getProductById(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        return s.get(Product.class, id);
+
+    }
+
+    public void addOrUpdateProduct(Product p) {
+        Session s = this.factory.getObject().getCurrentSession();
+        if (p.getId() == null) {
+            s.persist(p);
+        } else {
+            s.merge(p);
+        }
+
+    }
 //    
 //    public void deleteProduct(int id) {
 //        try (Session s = HibernateUtils.getFactory().openSession()) {

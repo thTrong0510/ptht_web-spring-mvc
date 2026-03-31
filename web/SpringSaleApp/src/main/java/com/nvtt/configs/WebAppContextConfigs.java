@@ -11,6 +11,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -39,4 +40,15 @@ public class WebAppContextConfigs implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new CategoryFormatter());
     }
+
+    // cấu hình folder public ra bên ngoài để lưu trữ css, ảnh, ... 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // chỉ định đường dẫn public ra bên ngoài - tên alias ra ngoài - đường dẫn thực sự 
+        // classpath: khi build dự án -> target/classes/static... đât là đường vẫn lý thực sự trên máy tính lưu trữ 
+        registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/images");
+        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css");
+
+    }
+
 }

@@ -43,6 +43,7 @@ public class Category implements Serializable {
     @Column(name = "description")
     private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
+    @JsonIgnore
     private Set<Product> productSet;
 
     public Category() {
@@ -113,5 +114,5 @@ public class Category implements Serializable {
     public String toString() {
         return "com.dht.pojo.Category[ id=" + id + " ]";
     }
-    
+
 }

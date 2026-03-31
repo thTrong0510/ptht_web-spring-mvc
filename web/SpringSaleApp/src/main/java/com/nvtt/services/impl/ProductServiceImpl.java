@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @author vthan
  */
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
@@ -25,6 +25,16 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public List<Product> getProducts(Map<String, String> params) {
         return this.productRepository.getProducts(params);
+    }
+    
+    @Override
+    public void addOrUpdateProduct(Product p) {
+        this.productRepository.addOrUpdateProduct(p);
+    }
+    
+    @Override
+    public Product getProductById(int id) {
+        return this.productRepository.getProductById(id);
     }
     
 }

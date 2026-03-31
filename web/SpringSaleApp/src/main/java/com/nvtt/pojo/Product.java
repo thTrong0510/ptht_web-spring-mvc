@@ -66,18 +66,23 @@ public class Product implements Serializable {
     @Column(name = "active")
     private Boolean active;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    @JsonIgnore
     private Set<ProdTag> prodTagSet;
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonProperty(value = "category") // lúc này nó sẽ dùng category làm key để seri... chứ ko cùng categoryId -> deseri.. cũng dùng category để làm key
     private Category categoryId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    @JsonIgnore
     private Set<Comment> commentSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    @JsonIgnore
     private Set<OrderDetail> orderDetailSet;
 
 //    @Transient
 //    private Multipart file;
-
+    
+    // mặt định @...One -> eager -> lấy rời các câu truy vấn 
     public Product() {
     }
 
@@ -199,7 +204,6 @@ public class Product implements Serializable {
 //    public Multipart getFile() {
 //        return file;
 //    }
-
     @Override
     public int hashCode() {
         int hash = 0;
