@@ -4,7 +4,8 @@
  */
 package com.nvtt.pojo;
 
-import jakarta.mail.Multipart;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -20,7 +21,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
