@@ -4,11 +4,15 @@
  */
 package com.nvtt.configs;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.nvtt.formatters.CategoryFormatter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -51,4 +55,27 @@ public class WebAppContextConfigs implements WebMvcConfigurer {
 
     }
 
+    // bean cloudinary
+    @Bean
+    public Cloudinary cloudinary() {
+        Cloudinary cloudinary = new Cloudinary(
+                ObjectUtils.asMap(
+                    "cloud_name", "web_springmvc",
+                    "api_key", "529253433446669",
+                    "api_secret", "_4PQw4A1aNKBkaX_gs2gfHviccA",
+                    "secure", true)
+        );
+        return cloudinary;
+    }
+    
+    // bean parser dùng để trích xuất thông tin file ra từ request - phải đặt tên hàm đúng multipartResolver thì nó mới hoạt động
+    // hoặc là đặt tên hàm khác nhưng phải cấu hình đây là Bean multipartResolver -> tên hàm chính là tên Bean -> dùng @Bean(name = "multipartResolver")
+    @Bean
+    public StandardServletMultipartResolver multipartResolver() {
+        return new StandardServletMultipartResolver();
+        // tiếp theo cần formatter để trích xuất khóa ngoại ra cũng chính là CategoryFormatter  
+    }
+    
+    
+    
 }

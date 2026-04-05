@@ -6,7 +6,6 @@ package com.nvtt.controllers;
 
 import com.nvtt.pojo.Product;
 import com.nvtt.services.ProductService;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;

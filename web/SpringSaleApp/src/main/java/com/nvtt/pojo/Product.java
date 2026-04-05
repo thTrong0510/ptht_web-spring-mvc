@@ -21,9 +21,11 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -79,8 +81,8 @@ public class Product implements Serializable {
     @JsonIgnore
     private Set<OrderDetail> orderDetailSet;
 
-//    @Transient
-//    private Multipart file;
+    @Transient
+    private MultipartFile file;
     
     // mặt định @...One -> eager -> lấy rời các câu truy vấn 
     public Product() {
@@ -191,19 +193,20 @@ public class Product implements Serializable {
         this.orderDetailSet = orderDetailSet;
     }
 
-//    /**
-//     * @return the file
-//     */
-//    public Multipart setFile() {
-//        return file;
-//    }
-//
-//    /**
-//     * @return the file
-//     */
-//    public Multipart getFile() {
-//        return file;
-//    }
+        /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

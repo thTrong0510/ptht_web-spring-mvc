@@ -13,7 +13,7 @@
         <!--bình thường nếu ko chỉ định action -> thì đang đứng ở trang nào nó sẽ chỉ định về trang đó-->
         <!--việc thêm enctype=... nếu cấu hình đúng -> có thể dữ liệu sai -> qua java sẽ ko binding dữ liệu được rất dễ dẫn tới set dữ liệu product = null hết-->
         <!--enctype="multipart/form-data" lưu ý khi dùng ko được tự tiện-->
-        <form method="post" th:object="${product}" th:action="@{/admin/products}">
+        <form method="post" enctype="multipart/form-data" th:object="${product}" th:action="@{/admin/products}">
             <input type="hidden" class="form-control" th:field="*{id}">
 
             <div class="mb-3 mt-3">
@@ -26,14 +26,14 @@
             <!--đối với trường khóa ngoại cũng dùng th:field ở đây để đóng gói nó thành 1 object chứ nếu gửi các thông tin lẻ ở đây chính là id lên tới spring nó ko biết đóng gọi như thế nào -> spring sẽ chặn bắt lỗi bad request content-->
             <!--và cần phải thêm 1 cái formatter ở đây mình sẽ tạo riêng 1 gói cấu hình cho nó--> 
             <div class="mb-3 mt-3">
-                <select class="form-select"  th:field="*{categoryId}"> 
+                <select class="form-select"  th:field="*{categoryId}">  <!-- phải điền tên thuộc tính gốc -->
                     <option th:each="c:${categories}" th:value="${c.id}"  th:text="${c.name}"></option>
                 </select>
             </div>
 
-            <!--            <div class="mb-3 mt-3">
-                            <input type="file" th:field="*{file}" class="form-control" placeholder="Image">
-                        </div>-->
+            <div class="mb-3 mt-3">
+                <input type="file" th:field="*{file}" class="form-control" placeholder="Image">
+            </div>
 
             <input th:if="${product.id == null}" type="submit" class="btn btn-primary" value="Submit">
             <input th:if="${product.id != null}" type="submit" class="btn btn-primary" value="Update">

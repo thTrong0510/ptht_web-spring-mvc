@@ -4,6 +4,8 @@
  */
 package com.nvtt.configs;
 
+import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.ServletRegistration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
@@ -33,6 +35,21 @@ public class DispatcherServeletInit extends AbstractAnnotationConfigDispatcherSe
     @Override
     protected String[] getServletMappings() {
         return new String[] {"/"};
+    }
+    
+    // muốn dùng cloudinary và làm việc với file cần custom lại - để đăng ký 1 multipart file 
+    // phiên bản cũ thì nó sẽ thông qua multipart common (file tách riêng bên ngoài chứ k cấu hình trong này)
+    
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        registration.setMultipartConfig(
+               new MultipartConfigElement("/", 50000000, 150000000, 0)
+        // 4 tham số lần lượt là: location nơi lưu tạm file trước khi upload, thường nằm trong /tmp của server tomcat - nhưng ở window có khi bị lỗi ở thư mục này -> dùng /
+        // kích thước tối đa của file cho phép
+        // kích thước tối đa của 1 request
+        // ngưỡng 0
+        );
+        // cần tạo thêm Bean về cloudinary bên webAppcontextConfigs
     }
     
 }
