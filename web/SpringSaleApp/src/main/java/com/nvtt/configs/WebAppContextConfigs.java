@@ -52,6 +52,7 @@ public class WebAppContextConfigs implements WebMvcConfigurer {
         // classpath: khi build dự án -> target/classes/static... đât là đường vẫn lý thực sự trên máy tính lưu trữ 
         registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/images");
         registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css");
+        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js");
 
     }
 
@@ -60,14 +61,14 @@ public class WebAppContextConfigs implements WebMvcConfigurer {
     public Cloudinary cloudinary() {
         Cloudinary cloudinary = new Cloudinary(
                 ObjectUtils.asMap(
-                    "cloud_name", "web_springmvc",
-                    "api_key", "529253433446669",
-                    "api_secret", "_4PQw4A1aNKBkaX_gs2gfHviccA",
-                    "secure", true)
+                        "cloud_name", "ddczaiwxu",
+                        "api_key", "529253433446669",
+                        "api_secret", "_4PQw4A1aNKBkaX_gs2gfHviccA",
+                        "secure", true)
         );
         return cloudinary;
     }
-    
+
     // bean parser dùng để trích xuất thông tin file ra từ request - phải đặt tên hàm đúng multipartResolver thì nó mới hoạt động
     // hoặc là đặt tên hàm khác nhưng phải cấu hình đây là Bean multipartResolver -> tên hàm chính là tên Bean -> dùng @Bean(name = "multipartResolver")
     @Bean
@@ -75,7 +76,5 @@ public class WebAppContextConfigs implements WebMvcConfigurer {
         return new StandardServletMultipartResolver();
         // tiếp theo cần formatter để trích xuất khóa ngoại ra cũng chính là CategoryFormatter  
     }
-    
-    
-    
+
 }

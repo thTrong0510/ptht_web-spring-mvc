@@ -4,6 +4,7 @@
  */
 package com.nvtt.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -36,6 +37,7 @@ import java.util.Set;
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active"),
     @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole"),
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar")})
+@JsonIgnoreProperties(value = {"password", "saleOrderSet", "commentSet"})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;

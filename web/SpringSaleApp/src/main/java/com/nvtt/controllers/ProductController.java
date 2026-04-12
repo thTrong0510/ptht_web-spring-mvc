@@ -55,6 +55,7 @@ public class ProductController {
             // - redirect: request ở trang đầu ~ ko liên quan gì đến trang sau 
             // - forward: cũng chuyển trang nhưng dùng chung 1 request 
         } catch (Exception ex) {
+            System.err.println(ex);
             return "/product";
         }
 

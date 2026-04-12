@@ -27,10 +27,14 @@
                     <td th:text="${p.name}"></td>
                     <td th:text="${p.price} + ' VND'"></td>
                     <td>
-                        <a href="" class="btn btn-info">Update</a>
-                        <button class="btn btn-danger">
+                        <a th:href="@{/admin/products/} + ${p.id}" class="btn btn-info">Update</a>
+                        <button class="btn btn-danger" 
+                                th:onclick="'deleteProductById(\'' + @{/api/products/} + ${p.id} + '\')'"
+                                
+                                >
                             Delete
                         </button>
+                        <!--khi dùng thymeleaf th:onclick="" thì bên trong "" là 1 expression -> cần chuỗi thì phải có thểm ''-->
                     </td>
                 </tr>
             </tbody>
@@ -43,6 +47,7 @@
     </div>
 
     <div th:replace="base :: footer"></div>
+    <script th:src="@{js/scripts.js}"></script>
 </body>
 </html>
 

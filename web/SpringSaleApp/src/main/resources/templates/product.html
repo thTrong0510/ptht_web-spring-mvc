@@ -15,6 +15,9 @@
         <!--enctype="multipart/form-data" lưu ý khi dùng ko được tự tiện-->
         <form method="post" enctype="multipart/form-data" th:object="${product}" th:action="@{/admin/products}">
             <input type="hidden" class="form-control" th:field="*{id}">
+            <input type="hidden" class="form-control" th:field="*{image}">
+            <!--ở đây mình vẫn giữ cái ảnh lại để nếu nó có gửi lên thì nó vẫn sẽ giữ được giá trị nếu ko thay đổi-->
+
 
             <div class="mb-3 mt-3">
                 <input type="text" class="form-control" placeholder="Enter name" required="true" th:field="*{name}">
@@ -33,6 +36,7 @@
 
             <div class="mb-3 mt-3">
                 <input type="file" th:field="*{file}" class="form-control" placeholder="Image">
+                <img th:if="${product.image != null}" th:src="${product.image}" />
             </div>
 
             <input th:if="${product.id == null}" type="submit" class="btn btn-primary" value="Submit">

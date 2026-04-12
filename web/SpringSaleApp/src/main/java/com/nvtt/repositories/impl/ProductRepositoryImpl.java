@@ -103,11 +103,10 @@ public class ProductRepositoryImpl implements ProductRepository {
         }
 
     }
-//    
-//    public void deleteProduct(int id) {
-//        try (Session s = HibernateUtils.getFactory().openSession()) {
-//            Product p = this.getProductById(id);
-//            s.remove(p);
-//        }
-//    }
+
+    public void deleteProduct(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Product p = this.getProductById(id);
+        s.remove(p);
+    }
 }

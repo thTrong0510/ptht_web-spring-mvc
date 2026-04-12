@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,6 +48,7 @@ public class ApiProductController {
         // nếu ở domain ... vào console: fetch("http://localhost:8080/SpringSaleApp/api/products").then(res => res.json()).then(data => console.log(data)) -> ra dữ liệu bth vì chung domain với server
         // nếu qua lms.ou.edu.vn làm tương tự nó sẽ bị lỗi CORS -> backend/server có thể cấu hình cho domain khác truy cập 
         
+        // Khi hiển thị ra thông tin chung thì phải hiện thị hạn chế lại -> khi nào xem detail mới get hết thông tin -> DTO 
         return ResponseEntity.ok(products);
     }
     
@@ -62,5 +64,11 @@ public class ApiProductController {
         
         // mặt định trong phiên bản cũ nếu trả về 1 đối tượng duy nhất nó sẽ trả về xml
         return ResponseEntity.ok(product);
+    }
+    
+    @DeleteMapping("/products/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProductById(@PathVariable("id") int id) {
+        this.productService.deleteProduct(id);
     }
 }
