@@ -1,5 +1,6 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <head>
         <title>Trang Chu</title>
     <th:block th:fragment="resources">
@@ -8,6 +9,14 @@
     </th:block>
 </head>
 <body>
+
+    <!--hasRole('ADMIN')-->
+    <div sec:authorize="isAuthenticated()">
+        <p>Người dùng: <span sec:authentication="name"></span></p>
+        <p>Vai trò: <span sec:authentication="authorities"></span></p>
+    </div>
+    <div sec:authorize="isAnonymous()">Chưa đăng nhập</div>
+
     <header th:fragment="header">
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container-fluid">
@@ -20,8 +29,17 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Trang Chu</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" sec:authentication="name" href="#"></a>
+                        </li>
                         <li class="nav-item" th:each="c: ${categories}">
-                            <a class="nav-link" href="#" th:text="${c.name}"></a>
+                            <a class="nav-link" href="#" th:text="${c.name}" sec:authorize="hasRole('ADMIN')"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" sec:authorize="isAnonymous()" sec:authentication="name" th:href="@{admin/login/}">Đăng Nhập</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -29,7 +47,7 @@
         </nav>
     </header>
 
-    
+
     <footer th:fragment="footer">
         <div class="alert alert-info mt-5">
             &copy; 2026

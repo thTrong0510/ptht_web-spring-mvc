@@ -4,8 +4,6 @@
  */
 package com.nvtt.configs;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.nvtt.formatters.CategoryFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -54,19 +52,6 @@ public class WebAppContextConfigs implements WebMvcConfigurer {
         registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css");
         registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js");
 
-    }
-
-    // bean cloudinary
-    @Bean
-    public Cloudinary cloudinary() {
-        Cloudinary cloudinary = new Cloudinary(
-                ObjectUtils.asMap(
-                        "cloud_name", "ddczaiwxu",
-                        "api_key", "529253433446669",
-                        "api_secret", "_4PQw4A1aNKBkaX_gs2gfHviccA",
-                        "secure", true)
-        );
-        return cloudinary;
     }
 
     // bean parser dùng để trích xuất thông tin file ra từ request - phải đặt tên hàm đúng multipartResolver thì nó mới hoạt động

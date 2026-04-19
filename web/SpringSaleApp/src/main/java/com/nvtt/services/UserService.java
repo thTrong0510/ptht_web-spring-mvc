@@ -6,13 +6,14 @@ package com.nvtt.services;
 
 import com.nvtt.pojo.User;
 import java.util.Map;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
  * @author vthan
  */
-public interface UserService {
+public interface UserService extends UserDetailsService {
     public User getUserByUsername(String username);
     public User addOrUpdateUser(Map<String, String> params, MultipartFile avatar);
 }

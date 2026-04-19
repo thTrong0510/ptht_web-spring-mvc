@@ -1,0 +1,41 @@
+
+dùng index ở status: vì nó chỉ có 3 giá trị -> tăng khả năng truy vấn , event_id, created_at
+index -> xác định đúng vùng cần tìm 
+
+
+xử lý khi xóa: 
+users → roles:
+	Nếu còn user thuộc role đó → không cho xóa role.
+
+role_permissions:
+	Xóa 1 role/permission → tự động xóa cặp role_permissions tương ứng
+
+organizer_verifications
+	Nếu user bị xóa → verification cũng xóa theo.
+	Nếu admin bị xóa → không xóa verification: case có nhiều admin 
+
+events
+	Nếu organizer đã tạo event → không cho xóa user (ở đây khi xóa user chỉ set is_active = false)
+	Nếu có event dùng category đó → không cho xóa category
+	Không xóa status khi event đang dùng
+
+orders
+	Không cho xóa user đã có order. 
+	Không cho xóa event đã có order. (lưu doanh thu)
+
+tickets
+	không cho xóa order khi đã có ticket
+	Không cho xóa event nếu còn ticket
+	Không cho xóa user nếu có ticket
+
+payments
+	Nếu xóa order → không cho xóa vì có payment
+
+payment_transactions
+	Nếu xóa payment → xóa transaction.
+
+event_statistics
+	Nếu xóa event → xóa thống kê.
+
+system_statistics_daily
+	Không có foreign key
